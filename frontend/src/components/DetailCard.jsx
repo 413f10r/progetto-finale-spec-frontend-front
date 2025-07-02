@@ -1,6 +1,5 @@
-export default function DetailCard({ product, ...props }) {
-    const data = product || props;
-    if (!data) return null;
+export default function DetailCard({ product }) {
+    if (!product) return null;
 
     const {
         title,
@@ -12,7 +11,7 @@ export default function DetailCard({ product, ...props }) {
         displaySize,
         image,
         mainCamera,
-    } = data;
+    } = product;
 
     return (
         <div className="card">

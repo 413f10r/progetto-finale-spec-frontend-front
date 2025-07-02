@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 export default function DefaultLayout({ children }) {
     return (
         <div>
-            <nav className="navBar">
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/compare">Comparatore</Link></li>
-                    <li><Link to="/favorites">Preferiti</Link></li>
-                    <li><input type="text" placeholder="CERCA" /></li>
-                </ul>
-            </nav>
+            <NavBar />
             <main>
                 {children}
             </main>

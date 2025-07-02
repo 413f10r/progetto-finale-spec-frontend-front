@@ -1,35 +1,26 @@
 import DefaultLayout from "../layouts/DefaultLayout";
-import { useState, useEffect } from "react";
+import Card from "../components/Card";
+import { useGlobalContext } from "../contexts/GlobalContext";
+
 
 export default function HomePage() {
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/smartphones")
-      .then(res => res.json())
-      .then(data => setData(data))
-      .catch(error => console.error(error))
-
-  }, [])
-
+  const { product } = useGlobalContext();
+ 
   return (
     <>
       <DefaultLayout>
-        {<h1>Benvenuto nella Home!</h1>
-        }
-        <ul>
-          {data.map(record => (
+        <h1>Benvenuto nella Home!</h1>
+        <figure className="banner-container">
+          <img src="/img/banner/banner-iphone16.jpg" alt="" className="banner-img" />
+        </figure>
+        <ul className="cards-container">
+          {product.map(record => (
             <li key={record.id}>
-              <img
-                src={record.image}
-                alt={record.title}
-                style={{ width: "80px", height: "80px", objectFit: "cover", marginRight: "1rem" }}
-              />
-              {record.title} - {record.category}
+              <Card id={record.id} title={record.title} category={record.category} />
             </li>
           ))}
         </ul>
+
       </DefaultLayout>
     </>
   )

@@ -2,21 +2,23 @@ import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useGlobalContext } from "../contexts/GlobalContext";
 
-export default function Card({ product, title, category, id }) {
+export default function Card({ product }) {
     const navigate = useNavigate();
     const { addToFavorites, product: allProducts, addToCompare } = useGlobalContext();
 
-    // Usa i dati da 'product' se presente, altrimenti dalle props singole
-    const data = product || { title, category, id };
-    const currentProduct = product || allProducts.find(p => p.id === data.id);
+    if (!product) return null;
+
+    const currentProduct = allProducts.find(p => p.id === product.id);
 
     return (
         <div className="card">
-            <h3>{data.title}</h3>
-            <p>{data.category}</p>
+            <h3>{product.title}</h3>
+            {/* <figure>
+                <img src={`/img/${product.category}/${product.image}`}  />
+            </figure> */}
             <button
                 className="btnDetail"
-                onClick={() => navigate(`/detail/${data.id}`)}
+                onClick={() => navigate(`/detail/${product.id}`)}
             >
                 Dettagli
             </button>

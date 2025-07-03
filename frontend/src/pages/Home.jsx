@@ -14,11 +14,12 @@ export default function HomePage() {
         <figure className="banner-container">
           <img src="/img/banner/banner-iphone16.jpg" alt="" className="banner-img" />
         </figure>
-          <BtnFilter />
+        <BtnFilter />
         <ul className="cards-container">
-          {filteredProducts.map(record => (
-            <li key={record.id}>
-              <Card id={record.id} title={record.title} category={record.category} />
+          {filteredProducts.map(product => (
+            <li key={product.id}>
+
+              <Card key={product.id} product={product} />
             </li>
           ))}
         </ul>

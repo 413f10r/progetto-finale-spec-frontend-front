@@ -12,7 +12,8 @@ export default function BtnFilter() {
                 value={category}
                 onChange={e => setCategory(e.target.value)}
             >
-<option value="">Tutte le Categorie 🔎</option>                <option value="smartphone">Smartphone</option>
+                <option value="">Tutte le Categorie 🔎</option>
+                <option value="smartphone">Smartphone</option>
                 <option value="tablet">Tablet</option>
                 <option value="laptop">Laptop</option>
             </select>

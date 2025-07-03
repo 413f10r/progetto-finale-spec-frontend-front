@@ -17,26 +17,15 @@ export default function DetailPage() {
       .catch(error => console.error(error));
   }, [id]);
   return (
+<DefaultLayout>
+  {record ? (
     <>
-      <DefaultLayout>
-        <h1>Dettagli prodotto</h1>
-        {record ? (
-          <DetailCard
-            id={record.id}
-            title={record.title}
-            category={record.category}
-            price={record.price}
-            brand={record.brand}
-            mainCamera={record.mainCamera}
-            description={record.description}
-            memory={record.memory}
-            displaySize={record.displaySize}
-            image={record.image}
-          />
-        ) : (
-          <p>Caricamento...</p>
-        )}
-      </DefaultLayout>
+      <h1>Dettagli {record.category}</h1>
+      <DetailCard product={record} />
     </>
+  ) : (
+    <p>Caricamento...</p>
+  )}
+</DefaultLayout>
   )
 }

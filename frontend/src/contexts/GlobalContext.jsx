@@ -78,6 +78,7 @@ export function GlobalProvider({ children }) {
         compareProduct,
         addToCompare,
         search,
+        setSearch,
         sortBy,
         sortOrder,
         category,

@@ -15,9 +15,10 @@ export default function DetailCard({ product }) {
 
     return (
         <div className="card">
+            <p><strong><h2>{title.toUpperCase()}</h2></strong> </p>
             <figure className="img-detail-container">
-
-                <img src={`/img/${category}/${image}`} alt={title} />             </figure>
+                <img src={`/img/${category}/${image}`} alt={title} />
+            </figure>
             <p><strong>Categoria:</strong> {category}</p>
             <p><strong>Brand:</strong> {brand}</p>
             <p><strong>Prezzo:</strong> {price} €</p>

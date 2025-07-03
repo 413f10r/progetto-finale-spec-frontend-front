@@ -12,7 +12,7 @@ export default function FavoritesPage() {
                 <ul className="cards-container">
                     {favoritesProduct.map(product => (
                         <li key={product.id}>
-                            <Card product = {product}/>
+                            <Card product={product} />
                         </li>
                     ))}
                 </ul>

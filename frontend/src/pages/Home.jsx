@@ -2,6 +2,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import Card from "../components/Card";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import BtnFilter from "../components/btnFilter";
+import BtnOrder from "../components/BtnOrder";
 
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
           <img src="/img/banner/banner-iphone16.jpg" alt="" className="banner-img" />
         </figure>
         <BtnFilter />
+        <BtnOrder/>
         <ul className="cards-container">
           {filteredProducts.map(product => (
             <li key={product.id}>

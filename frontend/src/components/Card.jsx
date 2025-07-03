@@ -4,35 +4,38 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function Card({ product }) {
     const navigate = useNavigate();
-    const { addToFavorites, product: allProducts, addToCompare } = useGlobalContext();
+    const { addToFavorites, addToCompare, removeFromCompare, isInCompare } = useGlobalContext();
 
     if (!product) return null;
 
-    const currentProduct = allProducts.find(p => p.id === product.id);
-
     return (
         <div className="card">
-            <h3>{product.title}</h3>
-            {/* <figure>
-                <img src={`/img/${product.category}/${product.image}`}  />
-            </figure> */}
-            <button
-                className="btnDetail"
-                onClick={() => navigate(`/detail/${product.id}`)}
-            >
-                Dettagli
-            </button>
-            <button
-                className="btnCompare"
-                onClick={() => addToCompare(currentProduct)}
-            >
-                Compara
-            </button>
-            <FaHeart
-                onClick={() => addToFavorites(currentProduct)}
-                color="red"
-                style={{ cursor: "pointer" }}
-            />
+            <div className="card-heart">
+                <FaHeart
+                    onClick={() => addToFavorites(product)}
+                    color="red"
+                    style={{ cursor: "pointer" }}
+                />
+            </div>
+            <h3>{product.title.toUpperCase()}</h3>
+            <p style={{ fontWeight: "bold", margin: "8px 0" }}>
+                Categoria: {product.category}
+            </p>
+            <div className="card-btn-row">
+                <button
+                    className="btnDetail"
+                    onClick={() => navigate(`/detail/${product.id}`)}
+                >
+                    Dettagli
+                </button>
+             
+<button
+  className="btnCompare"
+  onClick={() => isInCompare(product.id) ? removeFromCompare(product.id) : addToCompare(product)}
+>
+  <strong>{isInCompare(product.id) ? "RIMUOVI da" : "AGGIUNGI a"} Confronta</strong>
+</button>
+            </div>
         </div>
     );
 }

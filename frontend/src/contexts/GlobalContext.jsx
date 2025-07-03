@@ -1,73 +1,104 @@
-import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { createContext, useContext, useState, useMemo, useEffect, useCallback } from "react";
 
 const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
-    const url = import.meta.env.VITE_BASE_URL
+    const url = import.meta.env.VITE_BASE_URL;
 
     const [product, setProduct] = useState([]);
-    //gestire comparazione
-    const [compareProduct, setCompareProduct] = useState([])
-    //gestire input ricerca
-    const [search, setSearch] = useState("")
-    //gestire filtro
-    const [category, setCategory] = useState("")
-    //gestire prefe
-    const [favoritesProduct, setFavoritesProduct] = useState([])
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [compareProduct, setCompareProduct] = useState([]);
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("");
+    const [sortBy, setSortBy] = useState("");
 
-    const [sortBy, setSortBy] = useState("title"); // o "price", ecc.
-    const [sortOrder, setSortOrder] = useState(1); // 1 = asc, -1 = desc
-
+    // Preferiti
+    const [favoritesProduct, setFavoritesProduct] = useState(() => {
+        const saved = localStorage.getItem("favorites");
+        return saved ? JSON.parse(saved) : [];
+    });
 
     useEffect(() => {
-        fetch("http://localhost:3001/products")
-            .then(res => res.json())
-            .then(product => setProduct(product))
-            .catch(error => console.error(error))
+        localStorage.setItem("favorites", JSON.stringify(favoritesProduct));
+    }, [favoritesProduct]);
 
-    }, [])
+    // Fetch lista prodotti
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const response = await fetch(`${url}/products`);
+                const data = await response.json();
+                console.log("Prodotti caricati:", data);
+                setProduct(data);
+            } catch (err) {
+                console.error("Errore fetch prodotti:", err);
+            }
+        };
+        getProducts();
+    }, [url]);
 
+    // Fetch singolo prodotto per dettaglio (useCallback per evitare loop)
+    const fetchProductById = useCallback(async (id) => {
+        try {
+            const response = await fetch(`${url}/products/${id}`);
+            const data = await response.json();
+            setSelectedProduct(data.product);
+        } catch (error) {
+            console.error("Errore fetch singolo prodotto:", error);
+            setSelectedProduct(null);
+        }
+    }, [url]);
+
+    // Preferiti
     const addToFavorites = (product) => {
         if (!favoritesProduct.some(f => f.id === product.id)) {
-            setFavoritesProduct(prev => [...prev, product])
-            alert(`Prodotto  aggiunto ai preferiti`)
+            setFavoritesProduct(prev => [...prev, product]);
+            alert(`Prodotto aggiunto ai preferiti`);
         }
-    }
+    };
 
+    // Comparatore
+    const addToCompare = (productToAdd) => {
+        setCompareProduct(prev => {
+            if (prev.length >= 4) {
+                alert("Puoi confrontare solo 4 prodotti alla volta");
+                return prev;
+            }
+            if (!prev.some(p => p.id === productToAdd.id)) {
+                const fullProduct = product.find(p => p.id === productToAdd.id) || productToAdd;
+                alert("Prodotto aggiunto al comparatore!");
+                return [...prev, fullProduct];
+            }
+            return prev;
+        });
+    };
 
-    const addToCompare = (product) => {
-        if (!compareProduct.some(c => c.id === product.id)) {
-            setCompareProduct(prev => [...prev, product])
-            alert(`Prodotto  aggiunto al comparatore`)
-        }
-    }
+    const isInCompare = (id) => compareProduct.some(p => p.id === id);
 
+    const removeFromCompare = (id) => {
+        setCompareProduct(prev => prev.filter(p => p.id !== id));
+    };
+
+    // Filtri e ordinamento
     const filteredProducts = useMemo(() => {
         let filtered = category
             ? product.filter(p => p.category === category)
             : product;
 
-        // Filtro ricerca per title
         if (search) {
             filtered = filtered.filter(p =>
                 p.title.toLowerCase().includes(search.toLowerCase())
             );
         }
 
-        // Ordinamento
         filtered = [...filtered].sort((a, b) => {
-            if (sortBy === "title") {
-                return a.title.localeCompare(b.title) * sortOrder;
-            }
-            if (sortBy === "price") {
-                return (a.price - b.price) * sortOrder;
-            }
+            if (sortBy === "a-z") return a.title.localeCompare(b.title);
+            if (sortBy === "z-a") return b.title.localeCompare(a.title);
             return 0;
         });
 
         return filtered;
-    }, [product, search, category, sortBy, sortOrder]);
-
+    }, [product, search, category, sortBy]);
 
     const value = {
         product,
@@ -77,24 +108,26 @@ export function GlobalProvider({ children }) {
         setCompareProduct,
         compareProduct,
         addToCompare,
+        isInCompare,
+        removeFromCompare,
         search,
         setSearch,
         sortBy,
-        sortOrder,
+        setSortBy,
         category,
         setCategory,
         filteredProducts,
-
-    }
+        selectedProduct,
+        fetchProductById,
+    };
 
     return (
         <GlobalContext.Provider value={value}>
             {children}
         </GlobalContext.Provider>
-    )
+    );
 }
 
 export function useGlobalContext() {
-    return useContext(GlobalContext)
-
+    return useContext(GlobalContext);
 }

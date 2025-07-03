@@ -1,31 +1,26 @@
 import DefaultLayout from "../layouts/DefaultLayout";
 import DetailCard from "../components/DetailCard";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react"
+import { useEffect } from "react";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function DetailPage() {
-  const { id } = useParams()
-  const [record, setRecord] = useState(null)
-
+  const { id } = useParams();
+  const { selectedProduct, fetchProductById } = useGlobalContext();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/products/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setRecord(data.product);
-      })
-      .catch(error => console.error(error));
-  }, [id]);
+    fetchProductById(id);
+  }, [id, fetchProductById]);
+
   return (
-<DefaultLayout>
-  {record ? (
-    <>
-      <h1>Dettagli {record.category}</h1>
-      <DetailCard product={record} />
-    </>
-  ) : (
-    <p>Caricamento...</p>
-  )}
-</DefaultLayout>
-  )
+    <DefaultLayout>
+      {selectedProduct ? (
+        <div className="detail-card-container">
+          <DetailCard product={selectedProduct} />
+        </div>
+      ) : (
+        <p>Caricamento...</p>
+      )}
+    </DefaultLayout>
+  );
 }

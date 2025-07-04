@@ -11,12 +11,15 @@ export default function HomePage() {
   return (
     <>
       <DefaultLayout>
-        <h1>Benvenuto nella Home!</h1>
         <figure className="banner-container">
-          <img src="/img/banner/banner-iphone16.jpg" alt="" className="banner-img" />
+          <img src="/img/banner/hero-smart-mood.jpg" alt="" className="banner-img" />
         </figure>
+        <div className="container-btn">
+
         <BtnFilter />
         <BtnOrder/>
+
+        </div>
         <ul className="cards-container">
           {filteredProducts.map(product => (
             <li key={product.id}>

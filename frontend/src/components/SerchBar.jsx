@@ -15,12 +15,13 @@ export default function SearchBar() {
     return (
         <>
             <input
+            className="search-bar"
                 type="text"
                 placeholder="CERCA"
                 value={input}
                 onChange={e => setInput(e.target.value)}
             />
-            <button className="btnDettagli" onClick={() => setSearch(input)}>
+            <button className="btn-search" onClick={() => setSearch(input)}>
                 CERCA
             </button>
         </>

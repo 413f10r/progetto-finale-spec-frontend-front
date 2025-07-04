@@ -4,7 +4,7 @@ export default function BtnOrder() {
     const { sortBy, setSortBy } = useGlobalContext()
 
     return (
-        <select name="btn-order"
+        <select className="btn  "
             value={sortBy}
             onChange={e => setSortBy(e.target.value)}
         >

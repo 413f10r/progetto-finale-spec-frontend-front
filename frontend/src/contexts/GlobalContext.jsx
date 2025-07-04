@@ -28,7 +28,6 @@ export function GlobalProvider({ children }) {
             try {
                 const response = await fetch(`${url}/products`);
                 const data = await response.json();
-                console.log("Prodotti caricati:", data);
                 setProduct(data);
             } catch (err) {
                 console.error("Errore fetch prodotti:", err);
@@ -37,7 +36,6 @@ export function GlobalProvider({ children }) {
         getProducts();
     }, [url]);
 
-    // Fetch singolo prodotto per dettaglio (useCallback per evitare loop)
     const fetchProductById = useCallback(async (id) => {
         try {
             const response = await fetch(`${url}/products/${id}`);
@@ -66,7 +64,6 @@ export function GlobalProvider({ children }) {
             }
             if (!prev.some(p => p.id === productToAdd.id)) {
                 const fullProduct = product.find(p => p.id === productToAdd.id) || productToAdd;
-                alert("Prodotto aggiunto al comparatore!");
                 return [...prev, fullProduct];
             }
             return prev;

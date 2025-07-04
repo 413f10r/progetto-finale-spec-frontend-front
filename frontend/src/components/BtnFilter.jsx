@@ -8,7 +8,7 @@ export default function BtnFilter() {
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <FaFilter style={{ color: "#999" }} />
             <select
-                className="btn-category"
+                className="btn btn-"
                 value={category}
                 onChange={e => setCategory(e.target.value)}
             >

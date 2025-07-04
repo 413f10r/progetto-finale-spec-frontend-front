@@ -18,16 +18,18 @@ export default function ComparePage() {
         ).then(setDetailedProducts);
     }, [compareProduct]);
 
+
     return (
-        <DefaultLayout>
-            <h1>Compare</h1>
-            <ul className="compare-cards-container">
-                {detailedProducts.map(product => (
-                    <li key={product.id}>
-                        <DetailCard product={product} />
-                    </li>
-                ))}
-            </ul>
-        </DefaultLayout>
-    );
+    <DefaultLayout>
+        <h1>Compare</h1>
+        <div className="compare-cards-container">
+            {detailedProducts.map(product => (
+                <div className="compare-detail-card" key={product.id}>
+                    <DetailCard product={product} compare/>
+                </div>
+            ))}
+        </div>
+    </DefaultLayout>
+);
+    
 }

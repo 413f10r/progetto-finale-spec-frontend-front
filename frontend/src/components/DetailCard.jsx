@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { FaHeart } from "react-icons/fa";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import BtnHeart from "./BtnHeart";
 
 export default function DetailCard({ product, compare }) {
-    const { addToFavorites } = useGlobalContext();
 
     if (!product) return null;
 
@@ -25,16 +22,18 @@ export default function DetailCard({ product, compare }) {
   
     return (
         <div className={containerClass} style={{ position: "relative" }}>
-       <BtnHeart/>
+       <BtnHeart product={product}/>
+       <div>
+
             <figure className="img-detail-container">
                 <img src={`/img/${category}/${image}`} alt={title} />
             </figure>
+            <h2 style={{ textAlign: "center" }}>{title?.toUpperCase()}</h2>
+
+       </div>
             <div className="detail-card-info">
                 <div className="detail-row">
-                    <span className="detail-label"></span>
-                    <span className="detail-value">
-                        <h2 style={{ textAlign: "center" }}>{title?.toUpperCase()}</h2>
-                    </span>
+                    
                 </div>
                 {/* Riga categoria centrata */}
                 <div className="detail-row">

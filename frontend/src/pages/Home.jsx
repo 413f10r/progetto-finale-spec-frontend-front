@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import BtnFilter from "../components/btnFilter";
 import BtnOrder from "../components/BtnOrder";
+import SearchBar from "../components/SerchBar";
 
 
 export default function HomePage() {
@@ -11,15 +12,18 @@ export default function HomePage() {
   return (
     <>
       <DefaultLayout>
+
         <figure className="banner-container">
           <img src="/img/banner/hero-smart-mood.jpg" alt="" className="banner-img" />
         </figure>
+        <SearchBar />
         <div className="container-btn">
 
-        <BtnFilter />
-        <BtnOrder/>
 
+          <BtnFilter />
+          <BtnOrder />
         </div>
+
         <ul className="cards-container">
           {filteredProducts.map(product => (
             <li key={product.id}>

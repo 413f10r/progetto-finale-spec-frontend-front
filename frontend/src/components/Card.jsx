@@ -9,20 +9,20 @@ export default function Card({ product }) {
 
     return (
         <div className="card">
-       <BtnHeart/>
+            <BtnHeart product={product} />
             <h3>{product.title.toUpperCase()}</h3>
             <p style={{ fontWeight: "bold", margin: "8px 0" }}>
-                Categoria: {product.category}
+                Categoria: {product.category.toUpperCase()}
             </p>
-        <div className="card-btn-row">
-    <button
-        className="btn btnDetail"
-        onClick={() => navigate(`/detail/${product.id}`)}
-    >
-        Dettagli
-    </button>
-    <BtnCompare product={product} />
-</div>
+            <div className="card-btn-row">
+                <button
+                    className="btn btnDetail"
+                    onClick={() => navigate(`/detail/${product.id}`)}
+                >
+                    Dettagli
+                </button>
+                <BtnCompare product={product} />
+            </div>
         </div>
     );
 }

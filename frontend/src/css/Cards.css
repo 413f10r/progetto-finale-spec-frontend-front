@@ -5,7 +5,7 @@
   background: #23272f;
   color: #f5f5f5;
   border-radius: 8px;
-  padding: 1.5rem 1rem;
+  padding: 1rem 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   text-align: center;
   width: 100%;
@@ -14,13 +14,48 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  padding-top: 1.8rem;
 }
+
+
+
+/* =========================
+   ICONA HEART
+   ========================= */
 
 .card-heart {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: -20px;
+  right: -10px;
+  /* cuore in alto a destra */
   z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.icon-heart {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.heart-info {
+  visibility: hidden;
+  opacity: 0;
+  margin-left: 8px;
+  background: #23272f;
+  color: #fff;
+  padding: 0.2rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  position: static;
+}
+
+.card-heart:hover .heart-info {
+  visibility: visible;
+  opacity: 1;
 }
 
 .card-btn-row {
@@ -31,7 +66,7 @@
 }
 
 .btnDetail {
-    background: linear-gradient(90deg, #0077ff 60%, #00c6ff 100%);
+  background: linear-gradient(90deg, #0077ff 60%, #00c6ff 100%);
   color: #f5f5f5;
   border-radius: 4px;
 }
@@ -41,9 +76,8 @@
   color: #23272f;
 }
 
-
 .btnCompare {
- background-color: white;
+  background-color: white;
   color: #23272f;
   border-radius: 4px;
 }
@@ -51,7 +85,6 @@
 .btnCompare:hover {
   background: #ffa600;
 }
-
 
 /* =========================
    CARDS CONTAINER (HomePage)
@@ -66,11 +99,9 @@
 }
 
 .cards-container li {
-    border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-    border: 3px solid rgb(0, 119, 255);
-  
-
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+  border: 3px solid rgb(0, 119, 255);
   flex: 1 1 28%;
   max-width: 28%;
   min-width: 250px;
@@ -137,7 +168,7 @@
   padding: 2rem 2.5rem;
   background: #23272f;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -186,7 +217,7 @@
 .compare-detail-card {
   background: #23272f;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 2px solid rgb(0, 119, 255);
   display: flex;
   flex-direction: column;
@@ -243,6 +274,7 @@
     min-width: 140px;
     padding: 0.7rem 0.2rem;
   }
+
   .compare-detail-card .img-detail-container {
     max-width: 120px;
     height: 120px;
@@ -261,6 +293,7 @@
     max-width: 95vw;
     min-width: 90vw;
   }
+
   .compare-detail-card .img-detail-container {
     max-width: 90vw;
     height: 90vw;
@@ -268,6 +301,7 @@
     min-height: 120px;
   }
 }
+
 .compare-cards-container {
   display: flex;
   flex-wrap: wrap;

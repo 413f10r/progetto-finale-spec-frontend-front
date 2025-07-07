@@ -46,19 +46,34 @@ li {
 .navBar a:hover {
   color: rgb(0, 119, 255);
 }
+.compare-badge, .fav-badge {
+  position: absolute;
+  top: -8px;
+  right: -22px;
+  background: #0077ff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.15em 0.6em;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 10;
+}
+.fav-badge {
+  background: #ff4d6d;
+}
 
 /* =========================
    BANNER
    ========================= */
 .banner-container {
-  width: 100%;
+  /* width: 80%; */
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
 }
 
 .banner-img {
-  max-width: 100%;
+  max-width: 90%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -72,9 +87,6 @@ li {
   align-items: center;
   gap: 1rem;
   margin: 2rem 0 0 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
 .btn {
@@ -112,6 +124,13 @@ li {
   color: #23272f;
 }
 
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: 0.5rem;  */
+}
+
 /* Modern Search Bar */
 .search-bar {
   padding: 0.6rem 1.2rem;
@@ -120,7 +139,7 @@ li {
   outline: none;
   font-size: 1rem;
   background: white;
-  color: #f5f5f5;
+  color: black;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
   transition: box-shadow 0.2s, background 0.2s;
   margin-right: 1rem;

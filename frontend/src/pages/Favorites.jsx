@@ -9,13 +9,15 @@ export default function FavoritesPage() {
         <>
             <DefaultLayout>
                 <h1>Preferiti</h1>
-                <ul className="cards-container">
-                    {favoritesProduct.map(product => (
-                        <li key={product.id}>
-                            <Card product={product} />
-                        </li>
-                    ))}
-                </ul>
+               <ul className="cards-container">
+  {favoritesProduct
+    .filter(product => product) // <-- filtra null/undefined
+    .map(product => (
+      <li key={product.id}>
+        <Card product={product} />
+      </li>
+  ))}
+</ul>
             </DefaultLayout>
         </>
     );

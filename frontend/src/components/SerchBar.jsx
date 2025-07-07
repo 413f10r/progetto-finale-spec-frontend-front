@@ -13,9 +13,9 @@ export default function SearchBar() {
     }, [input, setInput]);
 
     return (
-        <>
+        <div className="search-bar-container">
             <input
-            className="search-bar"
+                className="search-bar"
                 type="text"
                 placeholder="CERCA"
                 value={input}
@@ -24,6 +24,6 @@ export default function SearchBar() {
             <button className="btn-search" onClick={() => setSearch(input)}>
                 CERCA
             </button>
-        </>
+        </div>
     );
 }

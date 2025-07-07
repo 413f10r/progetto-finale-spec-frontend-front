@@ -14,7 +14,7 @@ export function GlobalProvider({ children }) {
 
     // Preferiti
     const [favoritesProduct, setFavoritesProduct] = useState(() => {
-        const saved = localStorage.getItem("favorites");
+        const saved = localStorage.getItem("favorites")
         return saved ? JSON.parse(saved) : [];
     });
 
@@ -51,9 +51,11 @@ export function GlobalProvider({ children }) {
     const addToFavorites = (product) => {
         if (!favoritesProduct.some(f => f.id === product.id)) {
             setFavoritesProduct(prev => [...prev, product]);
-            alert(`Prodotto aggiunto ai preferiti`);
         }
     };
+    const removeFromFavorites = (product) => {
+    setFavoritesProduct(prev => prev.filter(f => f.id !== product.id));
+};
 
     // Comparatore
     const addToCompare = (productToAdd) => {
@@ -101,6 +103,7 @@ export function GlobalProvider({ children }) {
         product,
         setProduct,
         addToFavorites,
+        removeFromFavorites,
         favoritesProduct,
         setCompareProduct,
         compareProduct,

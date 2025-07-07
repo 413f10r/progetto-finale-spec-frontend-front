@@ -1,28 +1,33 @@
-import { useState } from "react";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { FaHeart } from "react-icons/fa";
 
 export default function BtnHeart({ product }) {
-    const { addToFavorites } = useGlobalContext();
-    const [isFav, setIsFav] = useState(false);
+    const { favoritesProduct, addToFavorites, removeFromFavorites } = useGlobalContext();
+
+    const isFav = favoritesProduct.some(f => f.id === product.id);
 
     const handleHeartClick = () => {
-        addToFavorites(product);
-        setIsFav(true);
+        if (isFav) {
+            removeFromFavorites(product);
+        } else {
+            addToFavorites(product);
+        }
     };
 
-    return (
-        <span className="card-heart">
-            <FaHeart
-                onClick={handleHeartClick}
-                className="icon-heart"
-                style={{
-                    color: isFav ? "#ff4d6d" : "#fff",
-                    fontSize: "2rem",
-                    cursor: "pointer",
-                    transition: "color 0.2s"
-                }}
-            />
+    if (!product) return null;
+
+  return (
+    <span className="card-heart" style={{ position: "relative" }}>
+        <FaHeart
+            onClick={handleHeartClick}
+            className="icon-heart"
+            style={{
+                color: isFav ? "#ff4d6d" : "#fff"
+            }}
+        />
+        <span className="heart-info">
+            {isFav ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
         </span>
-    )
+    </span>
+);
 }

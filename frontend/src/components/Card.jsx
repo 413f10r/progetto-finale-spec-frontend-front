@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../contexts/GlobalContext";
 import BtnCompare from "./BtnCompare";
 import BtnHeart from "./BtnHeart";
+import SearchBar from "./SerchBar";
 
 export default function Card({ product }) {
     const navigate = useNavigate();
@@ -8,21 +10,30 @@ export default function Card({ product }) {
     if (!product) return null;
 
     return (
-        <div className="card">
-            <BtnHeart product={product} />
-            <h3>{product.title.toUpperCase()}</h3>
-            <p style={{ fontWeight: "bold", margin: "8px 0" }}>
-                Categoria: {product.category.toUpperCase()}
-            </p>
-            <div className="card-btn-row">
-                <button
-                    className="btn btnDetail"
-                    onClick={() => navigate(`/detail/${product.id}`)}
-                >
-                    Dettagli
-                </button>
-                <BtnCompare product={product} />
+      
+                
+            <div className="card">
+                <div className="card-heart-home">
+                    <BtnHeart product={product} />
+                </div>
+                <p><strong>{product.title.toUpperCase()}</strong></p>
+                <p><strong>
+                    Categoria: {product.category.toUpperCase()}
+                </strong>
+                </p>
+                <div className="card-btn-row">
+                    <button
+                        className="btn btn-detail"
+                        onClick={() => navigate(`/detail/${product.id}`)}
+                    >
+                        <strong>
+
+                        Dettagli
+                        </strong>
+                    </button>
+                    <BtnCompare product={product} />
+                </div>
             </div>
-        </div>
+        
     );
 }

@@ -61,7 +61,7 @@ export function GlobalProvider({ children }) {
     const addToCompare = (productToAdd) => {
         setCompareProduct(prev => {
             if (prev.length >= 4) {
-                alert("Puoi confrontare solo 4 prodotti alla volta");
+                alert("Puoi confrontare fino a 4 prodotti per volta, vistita la pagina Comparatore e poi aggiungi nuovi prodotti");
                 return prev;
             }
             if (!prev.some(p => p.id === productToAdd.id)) {

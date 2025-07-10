@@ -5,14 +5,15 @@ export default function BtnFilter() {
     const { category, setCategory } = useGlobalContext();
 
     return (
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <FaFilter style={{ color: "#999" }} />
+        <div >
+           
+            <p>🏷️ Filtra per categoria</p>
             <select
-                className="btn btn-"
+                className="filter-select"
                 value={category}
                 onChange={e => setCategory(e.target.value)}
             >
-                <option value="">Tutte le Categorie 🔎</option>
+                <option value="">Tutte le Categorie</option>
                 <option value="smartphone">Smartphone</option>
                 <option value="tablet">Tablet</option>
                 <option value="laptop">Laptop</option>

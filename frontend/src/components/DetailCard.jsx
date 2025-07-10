@@ -17,23 +17,26 @@ export default function DetailCard({ product, compare }) {
         mainCamera,
     } = product;
 
+    // Se la prop compare è true non applica nessuna classe, altrimenti applica la classe per il layout di dettaglio
     const containerClass = compare ? "" : "detail-card-container";
 
-  
+
     return (
         <div className={containerClass} style={{ position: "relative" }}>
-       <BtnHeart product={product}/>
-       <div>
+  <div className="card-heart">
+            <BtnHeart product={product} />
+</div>
 
-            <figure className="img-detail-container">
-                <img src={`/img/${category}/${image}`} alt={title} />
-            </figure>
-            <h2 style={{ textAlign: "center" }}>{title?.toUpperCase()}</h2>
+            <div>
+                <figure className="img-detail-container">
+                    <img src={`/img/${category}/${image}`} alt={title} />
+                </figure>
+                <h2 style={{ textAlign: "center" }}>{title?.toUpperCase()}</h2>
 
-       </div>
+            </div>
             <div className="detail-card-info">
                 <div className="detail-row">
-                    
+
                 </div>
                 {/* Riga categoria centrata */}
                 <div className="detail-row">

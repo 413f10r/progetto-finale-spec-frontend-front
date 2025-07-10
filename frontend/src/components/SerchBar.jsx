@@ -3,7 +3,7 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function SearchBar() {
     const { search, setSearch } = useGlobalContext();
-    const [input, setInput] = useState(search);
+    const [input, setInput] = useState("");
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -12,18 +12,27 @@ export default function SearchBar() {
         return () => clearTimeout(handler);
     }, [input, setInput]);
 
+
     return (
-        <div className="search-bar-container">
-            <input
-                className="search-bar"
-                type="text"
-                placeholder="CERCA"
-                value={input}
-                onChange={e => setInput(e.target.value)}
-            />
-            <button className="btn-search" onClick={() => setSearch(input)}>
-                CERCA
-            </button>
+        <div >
+            <p>🔎 Cerca Dispositivi per Nome</p>
+            <div className="searchbar-container">
+                <input
+                    className="searchbar-input"
+                    type="text"
+                    placeholder="Cosa cerchi? "
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                />
+                <button
+                    className="searchbar-btn"
+                    onClick={() => {
+                        setSearch(input);
+                    }}
+                >
+                    CERCA
+                </button>
+            </div>
         </div>
     );
 }

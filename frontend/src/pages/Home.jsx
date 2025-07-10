@@ -16,11 +16,10 @@ export default function HomePage() {
         <figure className="banner-container">
           <img src="/img/banner/hero-smart-mood.jpg" alt="" className="banner-img" />
         </figure>
-        <div className="container-btn">
-
+        <div className="filter-container">
           <BtnFilter />
-          <BtnOrder />
           <SearchBar />
+          <BtnOrder />
         </div>
 
         <ul className="cards-container">

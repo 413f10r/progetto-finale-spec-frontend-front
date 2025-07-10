@@ -1,24 +1,27 @@
 import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function BtnCompare({ product }) {
-    const { addToCompare, isInCompare } = useGlobalContext();
+    const { addToCompare, isInCompare, removeFromCompare } = useGlobalContext();
 
     if (!product) return null;
 
     const alreadyInCompare = isInCompare(product.id);
 
+    const handleClick = () => {
+        if (alreadyInCompare) {
+            removeFromCompare(product.id);
+        } else {
+            addToCompare(product);
+        }
+    };
+
     return (
         <button
-            className="btn btnCompare"
-            disabled={alreadyInCompare}
-            style={{
-                background: alreadyInCompare ? "#444" : "",
-                cursor: alreadyInCompare ? "not-allowed" : "pointer"
-            }}
-            onClick={() => !alreadyInCompare && addToCompare(product)}
+            className={`btn ${alreadyInCompare ? "btn-remove" : "btn-compare"}`}
+            onClick={handleClick}
         >
             <strong>
-                {alreadyInCompare ? "Confronta" : "Confronta"}
+                {alreadyInCompare ? "Rimuovi" : "Confronta"}
             </strong>
         </button>
     );

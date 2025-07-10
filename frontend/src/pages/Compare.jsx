@@ -1,5 +1,5 @@
 import { useGlobalContext } from "../contexts/GlobalContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 import DetailCard from "../components/DetailCard";
@@ -10,6 +10,11 @@ export default function ComparePage() {
     const { compareProduct, removeFromCompare, filteredProducts } = useGlobalContext();
     const [detailedProducts, setDetailedProducts] = useState([]);
     const navigate = useNavigate();
+    const cardRefs = useRef([])
+
+    const scrollToCard = () =>{
+cardRefs.current[idx]?.scrollIntoview({behavior:"smooth"})
+    }
 
     useEffect(() => {
         Promise.all(
@@ -23,10 +28,14 @@ export default function ComparePage() {
 
     return (
         <DefaultLayout>
-            <h3>CONFRONTA I TUOI PRODOTTI</h3>            <div className="compare-cards-container">
-                {detailedProducts.map(product => (
-                    <div className="compare-detail-card" key={product.id}>
-                        <DetailCard product={product} compare />
+            <h3>CONFRONTA I TUOI PRODOTTI</h3>
+            <div className="compare-cards-container">
+                {detailedProducts.map((product,idx) => (
+                    <div className="compare-detail-card"
+                     key={product.id}
+                        ref={el => cardRefs.current[idx] =el}
+                     >
+                        <DetailCard product={product} compare ref={cardRefs} />
                         <div className="compare-card-btn-row">
                             <button className="btn btn-remove"
                                 onClick={() => removeFromCompare(product.id)}>

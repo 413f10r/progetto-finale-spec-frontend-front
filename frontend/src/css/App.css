@@ -53,6 +53,10 @@ li {
   color: rgb(0, 119, 255);
 }
 
+.navBar-link {
+  position: relative;
+}
+
 /* =========================
    BANNER
    ========================= */
@@ -69,6 +73,7 @@ li {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
+
 .compare-badge,
 .fav-badge {
   position: absolute;
@@ -139,7 +144,7 @@ li {
 .btn-back-home:hover,
 .btn-remove:hover {
   transform: scale(1.13);
-  border:solid 2px
+  border: solid 2px
 }
 
 .btn-remove {
@@ -214,7 +219,7 @@ li {
 
 
 .searchbar-container {
-  
+
   display: flex;
   align-items: center;
   border-radius: 16px;
@@ -271,6 +276,7 @@ li {
 .filter-select:focus {
   box-shadow: 0 4px 16px rgba(0, 119, 255, 0.15);
 }
+
 .compare-searchbar-container {
   display: flex;
   justify-content: center;

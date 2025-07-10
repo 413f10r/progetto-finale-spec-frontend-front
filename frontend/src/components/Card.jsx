@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import BtnCompare from "./BtnCompare";
 import BtnHeart from "./BtnHeart";
-import SearchBar from "./SerchBar";
 
 export default function Card({ product }) {
     const navigate = useNavigate();

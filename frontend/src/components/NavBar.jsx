@@ -16,16 +16,16 @@ export default function NavBar() {
             <nav className="navBar">
                 <ul>
                     <li className="navBar-link">
-                        <Link to="/">Home</Link>
+                        <Link className="navBar-link-btn" to="/">Home</Link>
                     </li>
                     <li className="navBar-link">
-                        <Link to="/compare">Comparatore</Link>
+                        <Link className="navBar-link-btn" to="/compare">Comparatore</Link>
                         {compareProduct.length > 0 && (
                             <span className="compare-badge">{compareProduct.length}</span>
                         )}
                     </li>
                     <li className="navBar-link">
-                        <Link to="/favorites">Preferiti</Link>
+                        <Link className="navBar-link-btn" to="/favorites">Preferiti</Link>
                         {favoritesProduct.length > 0 && (
                             <span className="fav-badge">{favoritesProduct.length}</span>
                         )}

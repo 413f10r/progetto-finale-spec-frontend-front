@@ -10,11 +10,12 @@ export default function ComparePage() {
     const { compareProduct, removeFromCompare, filteredProducts, search, setSearch } = useGlobalContext();
     const [detailedProducts, setDetailedProducts] = useState([]);
     const navigate = useNavigate();
-    const cardRefs = useRef([])
+    const titleRef = useRef(null); // useRef sull'h3
 
-    const scrollToCard = () => {
-        cardRefs.current[idx]?.scrollIntoview({ behavior: "smooth" })
-    }
+    // Scrolla sull'h3 quando chiamato
+    const scrollToTitle = () => {
+        titleRef.current?.scrollIntoView({ behavior: "smooth"});
+    };
 
     useEffect(() => {
         Promise.all(
@@ -28,14 +29,13 @@ export default function ComparePage() {
 
     return (
         <DefaultLayout>
-            <h3>CONFRONTA I TUOI PRODOTTI</h3>
+            <h3 ref={titleRef}>CONFRONTA I TUOI PRODOTTI</h3>
             <div className="compare-cards-container">
-                {detailedProducts.map((product, idx) => (
+                {detailedProducts.map((product) => (
                     <div className="compare-detail-card"
                         key={product.id}
-                        ref={el => cardRefs.current[idx] = el}
                     >
-                        <DetailCard product={product} compare ref={cardRefs} />
+                        <DetailCard product={product} compare />
                         <div className="compare-card-btn-row">
                             <button className="btn btn-remove"
                                 onClick={() => removeFromCompare(product.id)}>
@@ -49,9 +49,7 @@ export default function ComparePage() {
                             >
                                 <strong>
                                     dettagli
-
                                 </strong>
-
                             </button>
                         </div>
                     </div>
@@ -65,7 +63,10 @@ export default function ComparePage() {
                     <ul className="cards-container">
                         {filteredProducts.map(product => (
                             <li key={product.id}>
-                                <Card product={product} />
+                                <Card
+                                    product={product}
+                                    onCompareClick={scrollToTitle} // scrolla sull'h3 al click di "Confronta"
+                                />
                             </li>
                         ))}
                     </ul>

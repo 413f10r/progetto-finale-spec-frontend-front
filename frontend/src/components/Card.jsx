@@ -8,16 +8,9 @@ import BtnHeart from "./BtnHeart";
 
 const Card = React.memo(function Card({ product, onCompareClick }) {
     const navigate = useNavigate();
-    const {  } = useGlobalContext();
-
-    // Log per visualizzare i render e i dati
-
-
     if (!product) return null;
 
     return (
-
-
         <div className="card">
             <div className="card-heart-home">
                 <BtnHeart product={product} />
@@ -33,14 +26,13 @@ const Card = React.memo(function Card({ product, onCompareClick }) {
                     onClick={() => navigate(`/detail/${product.id}`)}
                 >
                     <strong>
-
                         Dettagli
                     </strong>
                 </button>
                 <BtnCompare product={product}
                     onCompareClick={() => {
                         if (location.pathname === "/compare") {
-                            window.scrollTo({ top: 2, behavior: "smooth" })
+                            window.scrollTo({ top: 0, behavior: "smooth" })
                         }
                     }} />
             </div>

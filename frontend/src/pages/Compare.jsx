@@ -7,13 +7,13 @@ import SearchBar from "../components/SerchBar";
 import Card from "../components/Card"
 
 export default function ComparePage() {
-    const { compareProduct, removeFromCompare, filteredProducts } = useGlobalContext();
+    const { compareProduct, removeFromCompare, filteredProducts, search, setSearch } = useGlobalContext();
     const [detailedProducts, setDetailedProducts] = useState([]);
     const navigate = useNavigate();
     const cardRefs = useRef([])
 
-    const scrollToCard = () =>{
-cardRefs.current[idx]?.scrollIntoview({behavior:"smooth"})
+    const scrollToCard = () => {
+        cardRefs.current[idx]?.scrollIntoview({ behavior: "smooth" })
     }
 
     useEffect(() => {
@@ -30,11 +30,11 @@ cardRefs.current[idx]?.scrollIntoview({behavior:"smooth"})
         <DefaultLayout>
             <h3>CONFRONTA I TUOI PRODOTTI</h3>
             <div className="compare-cards-container">
-                {detailedProducts.map((product,idx) => (
+                {detailedProducts.map((product, idx) => (
                     <div className="compare-detail-card"
-                     key={product.id}
-                        ref={el => cardRefs.current[idx] =el}
-                     >
+                        key={product.id}
+                        ref={el => cardRefs.current[idx] = el}
+                    >
                         <DetailCard product={product} compare ref={cardRefs} />
                         <div className="compare-card-btn-row">
                             <button className="btn btn-remove"
@@ -60,7 +60,7 @@ cardRefs.current[idx]?.scrollIntoview({behavior:"smooth"})
             {compareProduct.length < 4 && (
                 <>
                     <div className="compare-searchbar-container">
-                        <SearchBar />
+                        <SearchBar search={search} setSearch={setSearch} />
                     </div>
                     <ul className="cards-container">
                         {filteredProducts.map(product => (

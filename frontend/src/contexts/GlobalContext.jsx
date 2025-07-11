@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useMemo, useEffect, useCallback } from "react";
+import useFilter from "../hooks/useFilter";
 
 const GlobalContext = createContext();
 
@@ -8,9 +9,6 @@ export function GlobalProvider({ children }) {
     const [product, setProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [compareProduct, setCompareProduct] = useState([]);
-    const [search, setSearch] = useState("");
-    const [category, setCategory] = useState("");
-    const [sortBy, setSortBy] = useState("");
 
     // Preferiti
     const [favoritesProduct, setFavoritesProduct] = useState(() => {
@@ -78,26 +76,17 @@ export function GlobalProvider({ children }) {
         setCompareProduct(prev => prev.filter(p => p.id !== id));
     };
 
-    // Filtri e ordinamento
-    const filteredProducts = useMemo(() => {
-        let filtered = category
-            ? product.filter(p => p.category === category)
-            : product;
 
-        if (search) {
-            filtered = filtered.filter(p =>
-                p.title.toLowerCase().includes(search.toLowerCase())
-            );
-        }
+const {
+    search,
+    setSearch,
+    category,
+    setCategory,
+    sortBy,
+    setSortBy,
+    filteredProducts
+} = useFilter(product);
 
-        filtered = [...filtered].sort((a, b) => {
-            if (sortBy === "a-z") return a.title.localeCompare(b.title);
-            if (sortBy === "z-a") return b.title.localeCompare(a.title);
-            return 0;
-        });
-
-        return filtered;
-    }, [product, search, category, sortBy]);
 
     const value = {
         product,

@@ -1,10 +1,17 @@
-import { useNavigate } from "react-router-dom";
+
+import React from "react";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import { useNavigate } from "react-router-dom";
 import BtnCompare from "./BtnCompare";
 import BtnHeart from "./BtnHeart";
 
-export default function Card({ product }) {
+
+const Card = React.memo(function Card({ product, onCompareClick }) {
     const navigate = useNavigate();
+    const {  } = useGlobalContext();
+
+    // Log per visualizzare i render e i dati
+
 
     if (!product) return null;
 
@@ -40,4 +47,5 @@ export default function Card({ product }) {
         </div>
 
     );
-}
+})
+export default Card

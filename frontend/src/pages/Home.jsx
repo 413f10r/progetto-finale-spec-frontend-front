@@ -7,7 +7,7 @@ import SearchBar from "../components/SerchBar";
 
 
 export default function HomePage() {
-  const { filteredProducts } = useGlobalContext();
+  const { filteredProducts, search, setSearch } = useGlobalContext();
 
   return (
     <>
@@ -18,7 +18,7 @@ export default function HomePage() {
         </figure>
         <div className="filter-container">
           <BtnFilter />
-          <SearchBar />
+          <SearchBar search={search} setSearch={setSearch} />
           <BtnOrder />
         </div>
 

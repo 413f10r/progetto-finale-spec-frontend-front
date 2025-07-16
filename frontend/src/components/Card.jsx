@@ -6,7 +6,7 @@ import BtnCompare from "./BtnCompare";
 import BtnHeart from "./BtnHeart";
 
 
-const Card = React.memo(function Card({ product, onCompareClick }) {
+const Card = React.memo(function Card({ product }) {
     const navigate = useNavigate();
     if (!product) return null;
 

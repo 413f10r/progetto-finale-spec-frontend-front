@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 import BtnCompare from "../components/BtnCompare";
 
 export default function DetailPage() {
-  const { id } = useParams();
-  const { selectedProduct, fetchProductById } = useGlobalContext();
-  const navigate = useNavigate()
+const { id } = useParams(); // estrae l'id del prodotto dalla URL
+const { selectedProduct, fetchProductById } = useGlobalContext(); // ottiene il prodotto selezionato e la funzione per caricarlo dal context
+const navigate = useNavigate(); // hook per la navigazione programmatica
 
-  useEffect(() => {
-    fetchProductById(id);
-  }, [id, fetchProductById]);
+useEffect(() => {
+    fetchProductById(id); // carica i dettagli del prodotto quando l'id cambia
+}, [id, fetchProductById]); // dipendenze: ricarica se cambia l'id o la funzione fetch
 
   return (
     <DefaultLayout>

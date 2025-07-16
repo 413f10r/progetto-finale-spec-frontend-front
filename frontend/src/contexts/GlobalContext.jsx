@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo, useEffect, useCallback } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import useFilter from "../hooks/useFilter";
 
 const GlobalContext = createContext();
@@ -9,6 +9,7 @@ export function GlobalProvider({ children }) {
     const [product, setProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [compareProduct, setCompareProduct] = useState([]);
+
 
     // Preferiti
     const [favoritesProduct, setFavoritesProduct] = useState(() => {
@@ -52,8 +53,8 @@ export function GlobalProvider({ children }) {
         }
     };
     const removeFromFavorites = (product) => {
-    setFavoritesProduct(prev => prev.filter(f => f.id !== product.id));
-};
+        setFavoritesProduct(prev => prev.filter(f => f.id !== product.id));
+    };
 
     // Comparatore
     const addToCompare = (productToAdd) => {
@@ -77,15 +78,17 @@ export function GlobalProvider({ children }) {
     };
 
 
-const {
-    search,
-    setSearch,
-    category,
-    setCategory,
-    sortBy,
-    setSortBy,
-    filteredProducts
-} = useFilter(product);
+    // const {
+    //     search,
+    //     setSearch,
+    //     category,
+    //     setCategory,
+    //     sortBy,
+    //     setSortBy,
+    //     filteredProducts
+    // } = useFilter(product);
+
+    const filterData = useFilter(product)
 
 
     const value = {
@@ -99,19 +102,12 @@ const {
         addToCompare,
         isInCompare,
         removeFromCompare,
-        search,
-        setSearch,
-        sortBy,
-        setSortBy,
-        category,
-        setCategory,
-        filteredProducts,
         selectedProduct,
         fetchProductById,
     };
 
     return (
-        <GlobalContext.Provider value={value}>
+        <GlobalContext.Provider value={{ ...filterData, ...value }}>
             {children}
         </GlobalContext.Provider>
     );

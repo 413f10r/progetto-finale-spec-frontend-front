@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useCallback } from "react";
 
 export default function useFilter(products) {
     const [search, setSearch] = useState("");
@@ -6,13 +6,18 @@ export default function useFilter(products) {
     const [category, setCategory] = useState("");
     const [sortBy, setSortBy] = useState("");
 
-    // Debounce della ricerca
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedSearch(search);
-        }, 500); // 500ms di debounce
-        return () => clearTimeout(handler);
-    }, [search]);
+    // debounce: limita la frequenza con cui una funzione viene eseguita
+    function debounce(callback, delay) {
+        let timer; // timer usato per ritardare l'esecuzione
+        return (value) => {
+            clearTimeout(timer); // cancella il timer precedente se l'utente continua a digitare/cliccare
+            timer = setTimeout(() => {
+                callback(value); // esegue la funzione solo dopo che è passato il delay senza nuove chiamate
+            }, delay);
+        }
+    }
+
+    const debouncedSetSearch = useCallback(debounce(setDebouncedSearch, 500), []);
 
     const filteredProducts = useMemo(() => {
         let filtered = category
@@ -35,8 +40,11 @@ export default function useFilter(products) {
     }, [products, debouncedSearch, category, sortBy]);
 
     return {
-        search,
-        setSearch,
+        search, // valore corrente della ricerca (aggiornato immediatamente)
+        setSearch: (value) => {
+            setSearch(value); // aggiorna subito lo stato per mantenere l'input reattivo
+            debouncedSetSearch(value); // attiva il debounce per aggiornare debouncedSearch dopo 500ms
+        },
         category,
         setCategory,
         sortBy,

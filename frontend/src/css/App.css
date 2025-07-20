@@ -68,8 +68,8 @@ li {
 }
 
 .banner-img {
-  max-width: 90%;
-  height: auto;
+  max-width: 95%;
+  max-height: auto;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
@@ -145,8 +145,9 @@ li {
   transform: scale(1.08);
   border: solid 2px
 }
-.navBar-link-btn:hover{
-    transform: scale(1.20);
+
+.navBar-link-btn:hover {
+  transform: scale(1.20);
 
 }
 
@@ -191,7 +192,7 @@ li {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin: 1rem 0 0 0;
+  margin: 2rem 0 0 0;
 }
 
 
@@ -272,7 +273,7 @@ li {
   color: black;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
   transition: box-shadow 0.2s, background 0.2s;
-  margin: 0 2rem 0 2rem;
+  margin: 0 7rem 0 7rem;
   cursor: pointer;
 }
 

@@ -168,7 +168,8 @@
   /* width: 80vw; */
   max-width: 900px;
   max-height: 60vh;
-  margin: 2rem auto;
+  margin: auto;
+  margin-top: 10vh;
   padding: 2rem 2.5rem;
   background: #23272f;
   border-radius: 12px;

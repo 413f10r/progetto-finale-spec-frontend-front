@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Route, Routes, } from "react-router-dom"
 import { GlobalProvider } from "./contexts/GlobalContext";
 import DefaultLayout from "./layouts/DefaultLayout"

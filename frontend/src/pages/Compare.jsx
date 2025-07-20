@@ -14,17 +14,42 @@ export default function ComparePage() {
 
     // Scrolla sull'h3 quando chiamato
     const scrollToTitle = () => {
-        titleRef.current?.scrollIntoView({ behavior: "smooth"});
+        titleRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
-        Promise.all(
-            compareProduct.map(prod =>
-                fetch(`http://localhost:3001/products/${prod.id}`)
-                    .then(res => res.json())
-                    .then(data => data.product)
-            )
-        ).then(setDetailedProducts);
+        // Definisco una funzione asincrona per usare await
+        const fetchDetails = async () => {
+            // Gestisco il caso in cui l'utente rimuove tutti i prodotti dal confronto
+            if (compareProduct.length === 0) {
+                setDetailedProducts([]); // Svuoto la lista dei dettagli
+                return; // Interrompo l'esecuzione
+            }
+
+            try {
+                // Creo un array di promesse
+                const promises = compareProduct.map(prod =>
+                    fetch(`http://localhost:3001/products/${prod.id}`)
+                        .then(res => {
+                            // controllo esplicito per errori HTTP (es. 404, 500)
+                            if (!res.ok) {
+                                throw new Error(`Errore HTTP! status: ${res.status}`);
+                            }
+                            return res.json();
+                        })
+                        .then(data => data.product)
+                );
+                // Aspetto che TUTTE le promesse siano risolte usando await
+                const products = await Promise.all(promises);
+                // Aggiorno lo stato solo a operazione completata con successo
+                setDetailedProducts(products);
+            } catch (error) {
+                // Se una qualsiasi delle promesse fallisce, catturo l'errore qui
+                console.error("Errore nel caricare i dettagli dei prodotti per il confronto:", error);
+            }
+        };
+
+        fetchDetails(); // Eseguo la funzione asincrona
     }, [compareProduct]);
 
     return (

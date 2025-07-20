@@ -60,7 +60,7 @@ export function GlobalProvider({ children }) {
     const addToCompare = (productToAdd) => {
         setCompareProduct(prev => {
             if (prev.length >= 4) {
-                alert("Puoi confrontare fino a 4 prodotti per volta, vistita la pagina Comparatore e poi aggiungi nuovi prodotti");
+                alert("Puoi confrontare fino a 4 prodotti per volta!");
                 return prev;
             }
             if (!prev.some(p => p.id === productToAdd.id)) {
@@ -78,15 +78,7 @@ export function GlobalProvider({ children }) {
     };
 
 
-    // const {
-    //     search,
-    //     setSearch,
-    //     category,
-    //     setCategory,
-    //     sortBy,
-    //     setSortBy,
-    //     filteredProducts
-    // } = useFilter(product);
+
 
     const filterData = useFilter(product)
 

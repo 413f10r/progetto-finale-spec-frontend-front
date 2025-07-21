@@ -281,9 +281,14 @@ li {
   box-shadow: 0 4px 16px rgba(0, 119, 255, 0.15);
 }
 
+
 .compare-searchbar-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 1.5rem 0;
+}
+
+.compare-title {
+  margin: 8vh;
 }

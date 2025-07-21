@@ -7,6 +7,7 @@ import SearchBar from "../components/SerchBar";
 import Card from "../components/Card"
 
 export default function ComparePage() {
+    const url = import.meta.env.VITE_BASE_URL;
     const { compareProduct, removeFromCompare, filteredProducts, search, setSearch } = useGlobalContext();
     const [detailedProducts, setDetailedProducts] = useState([]);
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function ComparePage() {
             try {
                 // Creo un array di promesse
                 const promises = compareProduct.map(prod =>
-                    fetch(`http://localhost:3001/products/${prod.id}`)
+                    fetch(`${url}/products/${prod.id}`)
                         .then(res => {
                             // controllo esplicito per errori HTTP (es. 404, 500)
                             if (!res.ok) {
@@ -54,7 +55,7 @@ export default function ComparePage() {
 
     return (
         <DefaultLayout>
-            <h3 ref={titleRef}>CONFRONTA I TUOI PRODOTTI</h3>
+            <h3 ref={titleRef} className="compare-title">CONFRONTA I TUOI PRODOTTI</h3>
             <div className="compare-cards-container">
                 {detailedProducts.map((product) => (
                     <div className="compare-detail-card"

@@ -5,7 +5,6 @@ const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
     const url = import.meta.env.VITE_BASE_URL;
-
     const [product, setProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [compareProduct, setCompareProduct] = useState([]);
